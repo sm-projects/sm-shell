@@ -9,7 +9,7 @@ My own implementation of a basic shell program. A refresher project.
 4. No piping or redirection.
 5. Only builtins are: cd, help, exit.
 
-###TO DO
+### TO DO
 1. Provide custom configuration options
 2. Extend built-in shell commands (pipes, find etc)
 3. Provide themes
