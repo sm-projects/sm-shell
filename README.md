@@ -13,3 +13,5 @@ My own implementation of a basic shell program. A refresher project.
 1. Provide custom configuration options
 2. Extend built-in shell commands (pipes, find etc)
 3. Provide themes
+
+[](https://brennan.io/2016/11/14/kernel-dev-ep3/)
