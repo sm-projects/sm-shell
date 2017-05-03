@@ -10,8 +10,10 @@ My own implementation of a basic shell program. A refresher project.
 5. Only builtins are: cd, help, exit.
 
 ### TO DO
-1. Provide custom configuration options
-2. Extend built-in shell commands (pipes, find etc)
-3. Provide themes
+1. Provide custom configuration options for prompts, set environment variables
+2. Extend built-in shell commands (pipes, history, re-direct, find etc)
+3. Redirect STDIN and STDOUT for the new processes by using < and >
+4. Place commands in the background with an & at the end of the command line
+5. Repeat a previously issued command by typing !number 
 
 [](https://brennan.io/2016/11/14/kernel-dev-ep3/)
