@@ -1,7 +1,7 @@
 #define  TRUE 1
 #define  FALSE !TRUE
 
-static  int SMSH_IS_INTERACTIVE;
+int SMSH_IS_INTERACTIVE;
 //Buffer size for read line
 #define SMSHELL_BUFFER_SIZE 1024;
 #define EXIT_STATUS 0;
