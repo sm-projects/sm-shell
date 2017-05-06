@@ -1,7 +1,7 @@
 # sm-shell
 My own implementation of a basic shell program. A refresher project. 
 
-<smshell> is a simple implementation of a shell in C. It demonstrates the basics of how a shell works. That is: read, parse, fork, exec, and wait. So I think it's pretty cool. Since it's a simple implementation, it has some limitations.
+<b>smshell</b> is a simple implementation of a shell in C. It demonstrates the basics of how a shell works. That is: read, parse, fork, exec, and wait. So I think it's pretty cool. Since it's a simple implementation, it has some limitations.
 
 1. Commands must be on a single line.
 2. Arguments must be separated by whitespace.
