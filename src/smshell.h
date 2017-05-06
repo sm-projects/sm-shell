@@ -1,13 +1,14 @@
 #define  TRUE 1
 #define  FALSE !TRUE
 
-int SMSH_IS_INTERACTIVE;
 //Buffer size for read line
-#define SMSHELL_BUFFER_SIZE 1024;
+#define SMSHELL_BUFFER_SIZE 1024;  //Maximum number of chars in the command line.
 #define EXIT_STATUS 0;
 #define SMSHELL_TOK_DELIM " \t\r\n\a"
 
 
+int SMSH_IS_INTERACTIVE;
+//Buffer size for read line
 //*********************** Inbuilt shell commands *****************************
 int smsh_cd(char **args);
 int smsh_help(char **args);

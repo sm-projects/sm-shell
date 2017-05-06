@@ -22,6 +22,11 @@
 
 
 
+void smsh_prompt() {
+    char  hostNm[1024] = "";
+    gethostname(hostNm, sizeof(hostNm));
+    printf("%s@%s %s >",getenv("LOGNAME"), hostNm, "SMSHELL");
+}
 int smsh_cd(char **args) {
   if (args[1] == NULL) {
     fprintf(stderr, "lsh: expected argument to \"cd\"\n");
@@ -46,6 +51,7 @@ int smsh_help(char **args) {
 }
 
 int smsh_exit(char **args) {
+
     return 0;
 }
 
@@ -205,7 +211,8 @@ void smshell_loop() {
     int status;
 
     do {
-        printf("<smshell> ");
+        //printf("<smshell> ");
+        smsh_prompt();
         line = smshell_read_line();
         args = smshell_parse_line(line);
         status = smshell_execute(args);
