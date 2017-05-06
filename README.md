@@ -19,7 +19,8 @@ My own implementation of a basic shell program. A refresher project.
 
 ### Notes
 1. Look into using [ncurses](https://www.gnu.org/software/ncurses/) library for writing to terminal in color.
+
+### Resources
 [](https://brennan.io/2016/11/14/kernel-dev-ep3/)
 [Implementing a Shell](https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell)
-
 [C-throw the switch](http://www.throwtheswitch.org/)
