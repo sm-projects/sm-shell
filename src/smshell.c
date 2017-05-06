@@ -22,11 +22,7 @@
 
 
 
-void smsh_prompt() {
-    char  hostNm[1024] = "";
-    gethostname(hostNm, sizeof(hostNm));
-    printf("%s@%s %s >",getenv("LOGNAME"), hostNm, "SMSHELL");
-}
+
 int smsh_cd(char **args) {
   if (args[1] == NULL) {
     fprintf(stderr, "lsh: expected argument to \"cd\"\n");
@@ -67,7 +63,20 @@ int smsh_pipe(int write_pid, int read_pid){
 
     return 0;
 }
-//****************************************** End of shell commands  implementation
+
+/****************************************** End of shell commands  implementation  ***/
+
+/**
+ * Create default shell prompt. Later this can be customized by setting  SMSH_PROMPT variable
+ * in the config file  or environment.
+ *
+ */
+void smsh_prompt() {
+    char  hostNm[1024] = "";
+    gethostname(hostNm, sizeof(hostNm));
+    printf("%s@%s %s >",getenv("LOGNAME"), hostNm, "SMSHELL");
+}
+
 void init_shell() {
     /** Check for interactive mode. */
     int shell_terminal = STDIN_FILENO;
