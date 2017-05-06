@@ -124,6 +124,19 @@ smshell/fast:
 	$(MAKE) -f CMakeFiles/smshell.dir/build.make CMakeFiles/smshell.dir/build
 .PHONY : smshell/fast
 
+#=============================================================================
+# Target rules for targets named sync
+
+# Build rule for target.
+sync: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sync
+.PHONY : sync
+
+# fast build rule for target.
+sync/fast:
+	$(MAKE) -f CMakeFiles/sync.dir/build.make CMakeFiles/sync.dir/build
+.PHONY : sync/fast
+
 smshell.o: smshell.c.o
 .PHONY : smshell.o
 
@@ -158,6 +171,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... run"
 	@echo "... smshell"
+	@echo "... sync"
 	@echo "... smshell.o"
 	@echo "... smshell.i"
 	@echo "... smshell.s"
