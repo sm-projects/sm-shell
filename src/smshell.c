@@ -16,37 +16,10 @@
 #include<sys/wait.h>
 #include<sys/types.h>
 #include<unistd.h>
+#include<termios.h>
+#include "smshell.h"
 
 
-
-//Buffer size for read line
-#define SMSHELL_BUFFER_SIZE 1024;
-#define EXIT_STATUS 0;
-#define SMSHELL_TOK_DELIM " \t\r\n\a"
-
-//*********************** Inbuilt shell commands *****************************
-int smsh_cd(char **args);
-int smsh_help(char **args);
-int smsh_exit(char **args);
-
-/*
-  List of builtin commands, followed by their corresponding functions.
- */
-char *builtin_str[] = {
-  "cd",
-  "help",
-  "exit"
-};
-
-int (*builtin_func[]) (char **) = {
-  &smsh_cd,
-  &smsh_help,
-  &smsh_exit
-};
-
-int smsh_num_builtins() {
-  return sizeof(builtin_str) / sizeof(char *);
-}
 
 
 int smsh_cd(char **args) {
@@ -76,7 +49,29 @@ int smsh_exit(char **args) {
     return 0;
 }
 
+int smsh_pipe(int write_pid, int read_pid){
+    //Pipe takes an array of 2 pids
+    int pids[2] = {write_pid, read_pid};
+
+    char buf[30];
+    if(pipe(pids) == -1) {
+        perror("Pipe failed.\n");
+        return 1;
+    }
+
+    return 0;
+}
 //****************************************** End of shell commands  implementation
+void init_shell() {
+    /** Check for interactive mode. */
+    int shell_terminal = STDIN_FILENO;
+    int isInteractive  = isatty(shell_terminal);
+    if (isInteractive) {
+        printf("Shell is running in interactive mode. \n");
+    } else {
+        printf("Shell is not running in interactive mode.\n");
+    }
+}
 /**
  * Allocates a block (see buffer size) and then reads a line from stdin.
  * If  text entered exceeds the initial block size then it reallocates more space.
@@ -132,6 +127,7 @@ char **smshell_parse_line(char *line) {
    }
    token = strtok(line,SMSHELL_TOK_DELIM);
    while(token != NULL) {
+   printf("Current token: %s \n",token);
        tokens[pos] = token;
        pos++;
 
@@ -194,6 +190,8 @@ int smshell_execute(char **args){
 
 void perform_cleanup(){
     //To be implemented
+    printf("Performing cleanups!\n");
+    printf("exiting smshell - goodbye!\n");
 }
 /**
  * The basic loop of the shell program will
@@ -226,6 +224,7 @@ void startup_msg() {
     printf("*********************************************\n");
 }
 int main(int argc, char **argv) {
+    init_shell();
     //Load any configuration file
     //load_config();
     startup_msg();
