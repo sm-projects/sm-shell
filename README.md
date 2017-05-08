@@ -18,7 +18,7 @@ My own implementation of a basic shell program. A refresher project.
 6. Provide output in colors
 
 ### Notes
-1. Look into using [ncurses](https://www.gnu.org/software/ncurses/) library for writing to terminal in color.
+1. Read [this article](http://www.linuxjournal.com/article/8603) to print in color.
 
 ### Resources
 [](https://brennan.io/2016/11/14/kernel-dev-ep3/)
