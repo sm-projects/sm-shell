@@ -1,28 +1,28 @@
 /**
  *  My own implementation of a shell called smshell.
  *
- */
-
-/**
  * Basic lifecycle of a shell program are the following
  * Initialize the shell
  * Parse and interpret the commands passed to the shell program from stdin
  * Execute the commands and collect the return status
  * cleanup, i.e  free any memory before the shell program terminates
- **/
+ */
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
 #include<sys/wait.h>
 #include<sys/types.h>
 #include<unistd.h>
-#include<termios.h>
+
 #include "smshell.h"
+#include "smutils.h"
 
-
-
-
-
+/** Implement in-built functions for smshell.  Currently the following functions are
+ *  supported
+ *            1. change directory
+ *            2. help
+ *            3. pipe
+ */
 int smsh_cd(char **args) {
   if (args[1] == NULL) {
     fprintf(stderr, "lsh: expected argument to \"cd\"\n");
@@ -233,16 +233,18 @@ void smshell_loop() {
 }
 
 void startup_msg() {
+    textcolor(BRIGHT,RED,BLACK);
     printf("*********************************************\n");
     printf("*** Welcome to smshell.                   ***\n");
     printf("*********************************************\n");
     printf("*********************************************\n");
     printf("*********************************************\n");
+    textcolor(RESET,WHITE,BLACK);
 }
 int main(int argc, char **argv) {
     init_shell();
     //Load any configuration file
-    //load_config();
+    //load_config()
     startup_msg();
     //Run the main shell loop
     smshell_loop();

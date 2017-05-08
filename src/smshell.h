@@ -6,7 +6,6 @@
 #define EXIT_STATUS 0;
 #define SMSHELL_TOK_DELIM " \t\r\n\a"
 
-
 int SMSH_IS_INTERACTIVE;
 //Buffer size for read line
 //*********************** Inbuilt shell commands *****************************
@@ -16,8 +15,8 @@ int smsh_exit(char **args);
 
 
 /*
-  List of builtin commands, followed by their corresponding functions.
- */
+ *  List of builtin commands, followed by their corresponding functions.
+*/
 char *builtin_str[] = {
   "cd",
   "help",
