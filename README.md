@@ -25,3 +25,5 @@ My own implementation of a basic shell program. A refresher project.
 2. [Implementing a Shell](https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell)
 3. [C-throw the switch](http://www.throwtheswitch.org/)
 4. [Simple C Shell](https://github.com/jmreyes/simple-c-shell)
+5. [Signal handling in Linux](http://www.alexonlinux.com/signal-handling-in-linux)
+6. [The Linux Signals Handling Model](http://www.linuxjournal.com/article/3985)
