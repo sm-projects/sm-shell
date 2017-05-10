@@ -21,6 +21,7 @@ My own implementation of a basic shell program. A refresher project.
 1. Read [this article](http://www.linuxjournal.com/article/8603) to print in color.
 
 ### Resources
-[](https://brennan.io/2016/11/14/kernel-dev-ep3/)
-[Implementing a Shell](https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell)
-[C-throw the switch](http://www.throwtheswitch.org/)
+1. [](https://brennan.io/2016/11/14/kernel-dev-ep3/)
+2. [Implementing a Shell](https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell)
+3. [C-throw the switch](http://www.throwtheswitch.org/)
+4. [Simple C Shell](https://github.com/jmreyes/simple-c-shell)
