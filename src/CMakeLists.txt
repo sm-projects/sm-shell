@@ -56,3 +56,17 @@ add_custom_target(sync
     COMMAND  git 
     WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
 )
+##############################################################################
+# Setup custom task for running memory leak test using Valgrind
+##############################################################################
+find_program(MEMORYCHECK_COMMAND valgrind)
+if (MEMORYCHECK_COMMAND)
+    message(STATUS "Found Valgrind: ${MEMORYCHECK_COMMAND}")
+    set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --error-exitcode=1")
+else()
+    message("Valgrind not found")
+endif()
+
+add_custom_target(memcheck
+  COMMAND ${MEMORY_CHECK_COMMAND} ${MEMORYCHECK_COMMAND_OPTIONS}
+)
