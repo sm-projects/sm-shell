@@ -7,15 +7,23 @@
  * Execute the commands and collect the return status
  * cleanup, i.e  free any memory before the shell program terminates
  */
+#define _GNU_SOURCE
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
 #include<sys/wait.h>
 #include<sys/types.h>
 #include<unistd.h>
-
+#include<termios.h>
+//#include<bits/sigaction.h>
+#include<signal.h>
 #include "smshell.h"
 #include "smutils.h"
+
+static pid_t  smsh_pgid;
+static int smsh_pid ;
+static int smsh_pgid;
+static struct termios shell_tmodes;
 
 /** Implement in-built functions for smshell.  Currently the following functions are
  *  supported
@@ -66,6 +74,7 @@ int smsh_pipe(int write_pid, int read_pid){
 
 /****************************************** End of shell commands  implementation  ***/
 
+
 /**
  * Create default shell prompt. Later this can be customized by setting  SMSH_PROMPT variable
  * in the config file  or environment.
@@ -77,16 +86,77 @@ void smsh_prompt() {
     printf("%s@%s %s >",getenv("LOGNAME"), hostNm, "SMSHELL");
 }
 
+/**
+ * Initialize - check to see the following
+ *
+ *  1. Check to see if invoked from another shell.
+ *  2. If this is a subshell that is running in interactive mode has to check if it has been placed
+ *     in the foreground by its parent process- ceck to see the following
+ *
+ *      1. Check to see if invoked from another shell.
+ *      2. If this is a subshell that is running in interactive mode thas check if it has been placed
+ *         in the foreground by its parent process
+ *
+ *   See GNU manual for more details on initializing the shell section
+ */
 void init_shell() {
+
+    smsh_pid = getpid();
     /** Check for interactive mode. */
-    int shell_terminal = STDIN_FILENO;
-    int isInteractive  = isatty(shell_terminal);
+    int isInteractive  = isatty(STDIN_FILENO);
+
     if (isInteractive) {
+        //Loop until this new subshell is in the foreground.
         printf("Shell is running in interactive mode. \n");
+        while(tcgetpgrp(STDIN_FILENO) != (smsh_pgid = getpgrp())) {
+            kill(smsh_pid, SIGTTIN);
+        }
+        /** Ignore  interactive and other job control signals. */
+        act_child.sa_handler = signalHandler_child;
+        act_int.sa_handler = signalHandler_int;
+
+        sigaction(SIGCHLD, &act_child, NULL);
+        sigaction(SIGINT, &act_int, NULL);
+
+        //Put this process into the same process group
+        setpgid(smsh_pid, smsh_pid);
+        smsh_pgid = getpgrp();
+        if(smsh_pid != smsh_pgid) {
+            perror("Could not find the shell in its own process group.");
+            exit(1);
+
+        }
+        //Grab control pf the terminal
+        tcsetpgrp(STDIN_FILENO, smsh_pgid);
+        // Save the default terminal attributes for shell
+        tcgetattr(STDIN_FILENO,&shell_tmodes);
     } else {
         printf("Shell is not running in interactive mode.\n");
+        exit(1);
     }
 }
+//////////////////////
+// signal handlers
+//////////////////////
+
+void signalHandler_child(int p) {
+    //Wait for all dead processed. Use a non-blocking call ro make sure that this signal does not block
+    //if a child process was cleaned up.
+    while(waitpid(-1, NULL,WNOHANG) > 0) {}
+    //printf("\n");
+}
+
+void signalHandler_int(int p) {
+    pid = getpid();
+    //We send a SIGTERM signal to the child process
+    if (kill(pid,SIGTERM)==0) {
+        printf("\nProcess %d received a SIGINT signal\n",pid);
+    } else {
+        printf("\n");
+    }
+}
+
+
 /**
  * Allocates a block (see buffer size) and then reads a line from stdin.
  * If  text entered exceeds the initial block size then it reallocates more space.
@@ -242,7 +312,7 @@ void startup_msg() {
     textcolor(RESET,WHITE,BLACK);
 }
 int main(int argc, char **argv) {
-    init_shell();
+    //init_shell();
     //Load any configuration file
     //load_config()
     startup_msg();

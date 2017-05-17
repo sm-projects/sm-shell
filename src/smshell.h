@@ -6,7 +6,8 @@
 #define EXIT_STATUS 0;
 #define SMSHELL_TOK_DELIM " \t\r\n\a"
 
-int SMSH_IS_INTERACTIVE;
+
+
 //Buffer size for read line
 //*********************** Inbuilt shell commands *****************************
 int smsh_cd(char **args);
@@ -33,3 +34,12 @@ int (*builtin_func[]) (char **) = {
 int smsh_num_builtins() {
     return sizeof(builtin_str)/sizeof(char *);
 }
+
+struct sigaction act_child;
+struct sigaction act_int;
+
+
+void signalHandler_child(int p);
+void signalHandler_int(int p);
+
+pid_t  pid; //current process id
