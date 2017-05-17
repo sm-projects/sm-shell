@@ -20,3 +20,4 @@ My own implementation of a basic shell program. A refresher project.
 [Implementing a Shell](https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell)
 
 [C-throw the switch](http://www.throwtheswitch.org/)
+[21sh Mini shell](https://github.com/julekgwa/21sh)
