@@ -14,6 +14,9 @@ set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
 set(VERSION_PATCH 0)
 
+#Add include directories
+include_directories(../includes)
+
 #Guard against in-source builds
 #include(safeguards)
 
@@ -44,7 +47,7 @@ if(CMAKE_C_COMPILER_ID MATCHES GNU)
     set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 endif()
 
-add_executable(smshell smshell.c)
+add_executable(smshell smshell.c ../includes/smshell.h)
 set(CMAKE_C_FLAGS "-std=c99")
 
 add_custom_target(run
@@ -59,7 +62,7 @@ add_custom_target(sync
 ##############################################################################
 # Setup custom task for running memory leak test using Valgrind
 ##############################################################################
-find_program(MEMORYCHECK_COMMAND valgrind)
+find_program(MEMORYCHECK_COMMAND "valgrind")
 if (MEMORYCHECK_COMMAND)
     message(STATUS "Found Valgrind: ${MEMORYCHECK_COMMAND}")
     set(MEMORYCHECK_COMMAND_OPTIONS "--leak-check=full --error-exitcode=1")

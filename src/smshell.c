@@ -126,10 +126,12 @@ void init_shell() {
             exit(1);
 
         }
+        printf("Reached here .....\n");
         //Grab control pf the terminal
         tcsetpgrp(STDIN_FILENO, smsh_pgid);
         // Save the default terminal attributes for shell
         tcgetattr(STDIN_FILENO,&shell_tmodes);
+        printf("Reached here .....\n");
     } else {
         printf("Shell is not running in interactive mode.\n");
         exit(1);
@@ -143,13 +145,13 @@ void signalHandler_child(int p) {
     //Wait for all dead processed. Use a non-blocking call ro make sure that this signal does not block
     //if a child process was cleaned up.
     while(waitpid(-1, NULL,WNOHANG) > 0) {}
-    //printf("\n");
+    printf("\n");
 }
 
 void signalHandler_int(int p) {
     pid = getpid();
     //We send a SIGTERM signal to the child process
-    if (kill(pid,SIGTERM)==0) {
+    if (kill(smsh_pid,SIGTERM)==0) {
         printf("\nProcess %d received a SIGINT signal\n",pid);
     } else {
         printf("\n");
@@ -212,7 +214,6 @@ char **smshell_parse_line(char *line) {
    }
    token = strtok(line,SMSHELL_TOK_DELIM);
    while(token != NULL) {
-   printf("Current token: %s \n",token);
        tokens[pos] = token;
        pos++;
 
