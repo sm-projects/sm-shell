@@ -177,6 +177,9 @@ char *smshell_read_line(void) {
     while(1) {
         //read a char
         c_in = getchar();
+        if (c_in == '>') {
+            printf("Redirection chars detected.\n");
+        }
         if (c_in == EOF || c_in == '\n') {
             buf[pos] = '\0';
             return buf;
@@ -240,20 +243,22 @@ int  smshell_launch(char **args) {
     pid_t pid, wpid;
     int status;
 
-    pid = fork();
-    if(pid == 0) {
-        //run execvp as a child process.
-        if(execvp(args[0],args) == -1) {
-            perror("sm-shell, error executing the shell command.");
-        }
-        exit(EXIT_FAILURE);
-    } else if (pid < 0) {
-        //Error forking
-        perror("sm-shell- error forking.");
-    }else {
-        do {
-            wpid = waitpid(pid,&status,WUNTRACED);
-        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    switch(pid = fork()) {
+        case  0:
+            //Run execvp as a child process
+            if(execvp(args[0],args) == -1) {
+              perror("sm-shell, error executing the shell command.");
+            }
+            break;
+        case  -1:
+           //Deal with error while forking
+            perror("sm-shell- error forking.");
+        default:
+        //Wait for child process to complete/exit
+            do {
+              wpid = waitpid(pid,&status,WUNTRACED);
+            } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+            break;
     }
    return 1;
 }
