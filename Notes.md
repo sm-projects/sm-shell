@@ -3,7 +3,5 @@
 ### Forking a process
 When creating a new child process using the fork command, the child process  is an exact duplicate of the
 parent process. However some the following subtle differences remain
-    1. When the fork action is performed the child receives duplicates of all of the parent’s
-       file descriptors. These duplicates are made such that the childi’s  duplicate file descriptors 
-       also points to all the files of the opened by the parent. Hence if the child process updates
-       the fide descriptors it is visible to the parent.
+
+1. When the fork action is performed the child receives duplicates of all of the parent’s file descriptors. These duplicates are made such that the childi’s  duplicate file descriptors also points to all the files of the opened by the parent. Hence if the child process updates the fide descriptors it is visible to the parent.
