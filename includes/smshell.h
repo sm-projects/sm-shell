@@ -1,3 +1,4 @@
+#ifndef SMSHELL_H
 #define  TRUE 1
 #define  FALSE !TRUE
 
@@ -43,3 +44,4 @@ void signalHandler_child(int p);
 void signalHandler_int(int p);
 
 pid_t  pid; //current process id
+#endif
