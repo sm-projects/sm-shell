@@ -11,3 +11,4 @@ parent process. However some the following subtle differences remain
 2. [LXR](http://lxr.linux.no/#linux+v4.10.1/)
 3. [Linux Programming Interface]()
 4. [Modular programming in C](http://www.icosaedro.it/c-modules.html)
+5. [Using the dup(i) system call](http://edusagar.com/articles/view/25/IO-redirection-using-dup-system-call)
