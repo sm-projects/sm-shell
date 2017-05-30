@@ -10,3 +10,4 @@ parent process. However some the following subtle differences remain
 1. [Linux Man Pages](https://linux.die.net/man/)
 2. [LXR](http://lxr.linux.no/#linux+v4.10.1/)
 3. [Linux Programming Interface]()
+4. [Modular programming in C](http://www.icosaedro.it/c-modules.html)
