@@ -31,3 +31,4 @@ My own implementation of a basic shell program. A refresher project.
 8. [How I Learned Linux](https://letsgolarval.wordpress.com/2015/06/23/how-i-learned-linux/)
 9. [The Linux Man Pages Online](https://linux.die.net/man/)
 10. [Hacker How to](http://www.catb.org/~esr/faqs/hacker-howto.html#skills1)
+11. [The jargon file](http://www.catb.org/jargon/html/index.html)
