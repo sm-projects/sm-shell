@@ -28,3 +28,6 @@ My own implementation of a basic shell program. A refresher project.
 5. [Signal handling in Linux](http://www.alexonlinux.com/signal-handling-in-linux)
 6. [The Linux Signals Handling Model](http://www.linuxjournal.com/article/3985)
 7. [CMake FAQ Wiki](https://cmake.org/Wiki/CMake_FAQ)
+8. [How I Learned Linux](https://letsgolarval.wordpress.com/2015/06/23/how-i-learned-linux/)
+9. [The Linux Man Pages Online](https://linux.die.net/man/)
+10. [Hacker How to](http://www.catb.org/~esr/faqs/hacker-howto.html#skills1)
