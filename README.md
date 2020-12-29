@@ -16,8 +16,10 @@ My own implementation of a basic shell program. A refresher project.
 4. Place commands in the background with an & at the end of the command line
 5. Repeat a previously issued command by typing !number 
 
-[](https://brennan.io/2016/11/14/kernel-dev-ep3/)
+[Guide](https://brennan.io/2016/11/14/kernel-dev-ep3/)
+
 [Implementing a Shell](https://www.gnu.org/software/libc/manual/html_node/Implementing-a-Shell.html#Implementing-a-Shell)
 
 [C-throw the switch](http://www.throwtheswitch.org/)
+
 [21sh Mini shell](https://github.com/julekgwa/21sh)
